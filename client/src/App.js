@@ -8,37 +8,13 @@ import Cookies from 'js-cookie';
 import axios from "axios";
 
  function App() {
-  const [userMessage, setuserMessage] = useState("");
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const config = {
-          withCredentials: true,
-        };
-        const response = await axios.get("http://localhost:4000/user/details",config);
-        setuserMessage(response.data.message); 
-        console.log("this is sent",userMessage);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-        // Handle the error, e.g., show an error message to the user
-      }
-    };
-
-    fetchData(); // Call the fetchData function when the component mounts
-  }, []);
-
-  useEffect(() => {
-    console.log("this is sent",userMessage);
-  }, [userMessage]);
   
   
-
+  
   return (
     <div className="App">
       <Router>
-        <Header message = {userMessage}/>
+        <Header />
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/signup" element={<SignUp/>}/>

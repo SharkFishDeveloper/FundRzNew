@@ -8,12 +8,15 @@ export const isLoggedIn = async (req,res,next)=>{
     const decodeToken = jwt.verify(fztoken,process.env.JWT_SECRET_KEY);
     const user = await UserModal.findById(decodeToken.userId);
     if(!user){
-        next();
+        return res.json({success:false,message:"Log in to continue"});
     }else{
+        req.user = user;
+        next();
         console.log(user);
-        res.json({success:true,foundUser:user,message:"foundUser"});
+        //return res.json({success:true,foundUser:user,message:"rq.user"});
     }
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ success: false, message: "Log in to continue" });
     }
 }

@@ -4,6 +4,8 @@ import Header from "./Components/Header.jsx";
 import Home from "./Components/Home.jsx";
 import Login from "./User/Login.jsx";
 import { UserContextProvider } from "./UserContx/UserContext.js";
+import CreateCampaign from "./User/CreateCampaign.jsx";
+import CreateCampaignDone from "./User/CreateCampaignDone.jsx";
 
  function App() {
   
@@ -18,6 +20,8 @@ import { UserContextProvider } from "./UserContx/UserContext.js";
           <Route path="/" element={<Home/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/create-campaign" element={<CreateCampaign/>}/>
+          <Route path="/create-campaign/done" element={<CreateCampaignDone />}/>
         </Routes>
       </Router>
       </UserContextProvider>

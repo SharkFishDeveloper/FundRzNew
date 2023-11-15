@@ -19,7 +19,7 @@ router.post("/signup",async(req,res)=>{
     }
     const newPassword = await bcrypt.hash(password,10);
 
-        const newUser = await UserModal.create({name,email,password:newPassword});
+    const newUser = await UserModal.create({name,email,password:newPassword});
 
 
         const token = jwt.sign({userId:newUser._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });
@@ -37,8 +37,6 @@ router.post("/signup",async(req,res)=>{
 
 router.post("/login",async(req,res)=>{
     try {
-        // const fztoken = req.cookies.fztoken;
-        // console.log("Reading cookie ",fztoken);
     const {email,password} = req.body;
     const user = await UserModal.findOne({email});
     if(!user){

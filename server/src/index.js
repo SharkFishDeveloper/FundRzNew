@@ -6,11 +6,11 @@ import { userRouter } from "../routes/userRoute.js";
 import cookieParser from "cookie-parser";
 import { isLoggedIn } from "../middleware/userMiddleware.js";
 import { detailsRouter } from "../routes/detailsRouter.js";
+import { campaignRouter } from "../routes/campaignRouter.js";
 
 dotenv.config({path: "config.env"});
 const app = express();
 app.use(express.json());
-//app.use(cors());
 app.use(cookieParser());
 app.use(cors({origin: 'http://localhost:3000',credentials:true}));
 
@@ -20,3 +20,4 @@ app.listen(4000,()=>console.log("Server started"));
 
 app.use("/user",detailsRouter);
 app.use("/registration",userRouter);
+app.use("/campaign",isLoggedIn,campaignRouter);

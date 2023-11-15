@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContx/UserContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-
+    const {setuserInfo,userInfo} = useContext(UserContext);
     const loginHandler = async(e)=>{
     e.preventDefault();
     console.log("Clicked login");
@@ -21,6 +22,7 @@ const Login = () => {
     },config);
 
     if(answer.data.message==="logged in successfully"){
+      setuserInfo(answer.data.message);
       navigate("/");   
       //window.location.reload();//! find solution for this
     }else{

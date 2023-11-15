@@ -1,8 +1,9 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../UserContx/UserContext';
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
@@ -17,7 +18,7 @@ function classNames(...classes) {
 
 export default function Header() {
 
-  const [userMessage, setuserMessage] = useState(null);
+  const {setuserInfo,userInfo} = useContext(UserContext);
   //*loading user
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +26,17 @@ export default function Header() {
         const config = {
           withCredentials: true,
         };
+        console.log("before loading user");
         const response = await axios.get("http://localhost:4000/user/details",config);
-        setuserMessage(response.data.message); 
-        console.log("this is sent",userMessage);
+        
+        // if(response.data.message==="foundUser"){
+        //   console.log("In if condition");
+        //   setuserInfo(response.data.message);
+        // }
+        setuserInfo(response.data.message);
+        //setuserMessage(response.data.message); 
+        //console.log("this is sent",userMessage);
+        console.log("value of usercontext",response.data.message);
       } catch (error) {
         console.error("Error fetching user details:", error);
         // Handle the error, e.g., show an error message to the user
@@ -35,11 +44,11 @@ export default function Header() {
     };
 
     fetchData(); // Call the fetchData function when the component mounts
-  }, []);
+  }, [userInfo]);
 
-  useEffect(() => {
-    console.log("this is sent",userMessage);
-  }, [userMessage]);
+  // useEffect(() => {
+  //   console.log("this is sent",userMessage);
+  // }, [userMessage]);
   //* logout
   const logoutHandler = async ()=> {
     const config = {
@@ -48,8 +57,9 @@ export default function Header() {
     try {
       const response = await axios.get("http://localhost:4000/registration/logout",config);
       console.log(response.data.message);
+      setuserInfo(null);
       alert(response.data.message);
-      window.location.reload();
+      //window.location.reload();
   }
   catch(error){
     console.log("error",error.response.data.message); 
@@ -94,7 +104,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      userMessage && (item.name === 'Log-in' || item.name === 'Sign-up') ? (
+                      (item.name === 'Log-in' || item.name === 'Sign-up') && (userInfo === 'foundUser' || userInfo==="logged in successfully") ? (
                         null // Don't render the link if condition is true
                       ) : (
                       <Link

@@ -1,11 +1,9 @@
-import {BrowserRouter as Router,Routes,Route, useLocation} from "react-router-dom";
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import SignUp from "./User/SignUP.jsx";
 import Header from "./Components/Header.jsx";
 import Home from "./Components/Home.jsx";
 import Login from "./User/Login.jsx";
-import { useEffect, useState } from "react";
-import Cookies from 'js-cookie';
-import axios from "axios";
+import { UserContextProvider } from "./UserContx/UserContext.js";
 
  function App() {
   
@@ -13,6 +11,7 @@ import axios from "axios";
   
   return (
     <div className="App">
+      <UserContextProvider>
       <Router>
         <Header />
         <Routes>
@@ -21,6 +20,7 @@ import axios from "axios";
           <Route path="/login" element={<Login/>}/>
         </Routes>
       </Router>
+      </UserContextProvider>
     </div>
   );
 }

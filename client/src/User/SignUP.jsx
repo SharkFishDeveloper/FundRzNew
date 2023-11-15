@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from "axios";
 import "./SignUP.css";
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContx/UserContext';
 
 
 const SignUP = () => {
@@ -10,10 +11,13 @@ const SignUP = () => {
   const [name,setName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-
+  const {setuserInfo} = useContext(UserContext);
   const signupHandler = async(e)=>{
     e.preventDefault();
     console.log("Clicked signup");
+    if(password.length<=5){
+     return alert("Password is too small");
+    }
     const config = {
       withCredentials: true,
     };
@@ -25,8 +29,9 @@ const SignUP = () => {
     },config);
 
     if(answer.data.message==="User created"){
+      setuserInfo(answer.data.message);
       navigate("/");
-      window.location.reload();//! find solution for this
+      //window.location.reload();//! find solution for this
     }else{
       alert(answer.data.message);
     }

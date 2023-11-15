@@ -17,7 +17,7 @@ router.get("/details",async(req,res)=>{
         return res.json({ success: false, message: "User not found" });
     }else{
         console.log(user);
-        res.json({success:true,foundUser:user,message:"foundUser"});
+        res.json({success:true,user:user,message:"foundUser"});
     }
     } catch (error) {
         console.error("Error fetching user details:", error);

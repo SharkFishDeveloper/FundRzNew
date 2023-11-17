@@ -18,12 +18,23 @@ const campaign = new mongoose.Schema({
     ownerAddress: { type: String, required: true },
     ownerEmail: { type: String, required: true },
     ownerName: { type: String, required: true },
+    campaignAddress:{ type: String, required: true },
     selectedCountry: { type: String, required: true },
     selectedState: { type: String, required: true },
     helpEmail: { type: String, required: true },
     donationTarget: { type: Number, required: true },
     upvotes:{type:Number,default:0},
     downvotes:{type:Number,default:0},
+    createdOn:{type:Date,default: Date.now},
+    fundingRecived:{type:Number},
+    likedPerson:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
+    dislikedPerson:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
+    comments:[{
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+      date: { type: Date, default: Date.now },
+      text: { type: String, required: true },
+      name: { type: String, required: true }
+    }]
 });
 
 export const campaignModal = mongoose.model("Campaign",campaign);

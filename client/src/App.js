@@ -6,7 +6,10 @@ import Login from "./User/Login.jsx";
 import { UserContextProvider } from "./UserContx/UserContext.js";
 import CreateCampaign from "./User/CreateCampaign.jsx";
 import CreateCampaignDone from "./User/CreateCampaignDone.jsx";
-
+import Campaigns from "./User/Campaigns.jsx";
+import CampaignDetailsPage from "./User/CampaignDetailsPage.jsx";
+import Favourite from "./User/Favourite.jsx";
+import UserProfile from "./User/UserProfile.jsx";
  function App() {
   
   
@@ -22,6 +25,10 @@ import CreateCampaignDone from "./User/CreateCampaignDone.jsx";
           <Route path="/login" element={<Login/>}/>
           <Route path="/create-campaign" element={<CreateCampaign/>}/>
           <Route path="/create-campaign/done" element={<CreateCampaignDone />}/>
+          <Route path="/campaigns" element={<Campaigns />}/>
+          <Route path="/campaign/view" element={<CampaignDetailsPage />}/>
+          <Route path="/favourites" element={<Favourite />}/>
+          <Route path="/user/profile" element={<UserProfile />}/>
         </Routes>
       </Router>
       </UserContextProvider>

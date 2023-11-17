@@ -1,6 +1,8 @@
 import express from "express";
 import { UserModal } from "../models/userModal.js";
 import jwt from 'jsonwebtoken';
+import { isLoggedIn } from "../middleware/userMiddleware.js";
+import { campaignModal } from "../models/CampaignModal.js";
 
 const router = express.Router();
 
@@ -24,5 +26,32 @@ router.get("/details",async(req,res)=>{
         return res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 });
+
+
+router.get("/profile",isLoggedIn,async(req,res)=>{
+    try {
+        const user = req.user;
+        console.log(user);
+        return res.json({success:true,message:user});
+        
+    } catch (error) {
+        
+    }
+});
+
+
+router.get("/favourites",isLoggedIn,async(req,res)=>{
+    try {
+        console.log("it will work");
+
+        const followingCampaignsData = req.user.followingCampaigns;
+        console.log("followingCampaignsData", followingCampaignsData);
+        return res.json({ success: true, message: followingCampaignsData });
+        
+    } catch (error) {
+        return res.json({ success: true, message: "loadScreen" });
+    }
+});
+
 
 export {router as detailsRouter};

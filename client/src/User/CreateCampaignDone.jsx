@@ -65,9 +65,7 @@ const CreateCampaignDone = () => {
       return (
         <div className="container mx-auto mt-8">
           <div className="text-2xl font-bold mb-4">Create Campaign Done</div>
-          <div className="mb-2">{formData.campaignName}</div>
-          <div className="mb-2">{formData.selectedCountry}</div>
-          <div className="mb-2">{formData.selectedState}</div>
+          
           {/* <div className="mb-2">{formData.subparticipants}</div> */}
     
           {/* Table with headings */}
@@ -147,12 +145,14 @@ const CreateCampaignDone = () => {
             </tbody>
           </table>
     
-          <button
-            onClick={(e) => submitHandler(e)}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Click me!
-          </button>
+          <div className="flex justify-center">
+  <button
+    onClick={(e) => submitHandler(e)}
+    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Create
+  </button>
+</div>
         </div>
       );
 

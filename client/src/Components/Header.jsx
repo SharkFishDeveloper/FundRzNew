@@ -81,10 +81,11 @@ export default function Header() {
 
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    
+    <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50 ">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8  ">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -101,9 +102,9 @@ export default function Header() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="h-8 w-auto"
+                    className="h-10 w-auto" size={30}
                     src="https://cdn.icon-icons.com/icons2/2351/PNG/512/logo_github_icon_143196.png"
-                    alt="Your Company"
+                    alt="Your Company" 
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -224,7 +225,7 @@ export default function Header() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
 
 

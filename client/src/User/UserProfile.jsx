@@ -59,6 +59,10 @@ const UserProfile = () => {
                 <div className="mb-4 text-center mt-4">
                   <h2 className="text-2xl font-bold">{user.name}</h2>
                   <p className="text-gray-500 mt-3">{user.email}</p>
+                  {user.joinedOn && (<p className="text-gray-500 mt-3">Joined on - {user.joinedOn.substring(0,10)}</p>)}
+                  {user.amountFunded && (
+                  <p className="text-gray-800 mt-3 font-bold">Amount donated - $ {user.amountFunded}</p>
+                  )}
                   {user.imageUrl && (
                 <div className="flex items-center justify-center mt-3">
                   <img

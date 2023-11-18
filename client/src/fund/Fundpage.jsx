@@ -73,6 +73,9 @@ const Fundpage = () => {
                   >
                     Pay
                   </button>
+                  <p className="text-red-600 text-lg mt-10">
+                Disclaimer - It is non-refundable
+              </p>
                 </div>) : (
               <LoadingFundsPage /> //!make error component
             )}

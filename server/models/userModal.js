@@ -6,6 +6,8 @@ const user = new mongoose.Schema({
     email:{type:String,required:true,unique:true,validate:[validator.isEmail,"Enter a valid email"]},
     password:{type:String,required:true,minlength: [6,"Password is too small"]},
     imageUrl:{type:String,default:null},
+    joinedOn:{type:Date,default:Date.now()},
+    amountFunded:{type:Number,defualt:0},
     createdCampaigns:[{
         _id: { type: mongoose.Schema.Types.ObjectId}, // Use the default ObjectId for _id
         campaignName: { type: String, required: true },

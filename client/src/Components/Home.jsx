@@ -18,10 +18,10 @@ const Home = () => {
         </div>
 
         {/* Image and Introduction */}
-        <div className="max-w-x bg-white p-8 rounded-md shadow-md mb-6 flex items-center">
+        <div className="max-w-x bg-white p-8 rounded-md shadow-md mb-6 flex items-center p-3">
           <img
             className="mr-20 rounded-lg shadow-lg"
-            src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80"
+            src="https://img.freepik.com/premium-photo/world-environment-earth-day-concept-with-globe-nature-eco-friendly-environment-ai-generated_342644-1058.jpg"
             alt="FunRaiser Campaign"
           />
           

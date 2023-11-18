@@ -247,6 +247,8 @@ router.put("/fund",async(req,res)=>{
         }
         else{
             campaign.fundingReceived += fundAmount;
+            req.user.amountFunded += fundAmount;
+            await req.user.save({validateBeforeSave:false});
             await campaign.save();
             return res.status(200).json({success:true,message:`Successfully donated - ${fundAmount}`});
             

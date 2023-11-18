@@ -10,9 +10,12 @@ import Campaigns from "./User/Campaigns.jsx";
 import CampaignDetailsPage from "./User/CampaignDetailsPage.jsx";
 import Favourite from "./User/Favourite.jsx";
 import UserProfile from "./User/UserProfile.jsx";
+import UserProfileUpdate from "./User/UserProfileUpdate.jsx";
+import FundPage from "./fund/Fundpage.jsx";
+import SearchPage from "./Search/SearchPage.jsx";
+
+
  function App() {
-  
-  
   
   return (
     <div className="App">
@@ -29,6 +32,9 @@ import UserProfile from "./User/UserProfile.jsx";
           <Route path="/campaign/view" element={<CampaignDetailsPage />}/>
           <Route path="/favourites" element={<Favourite />}/>
           <Route path="/user/profile" element={<UserProfile />}/>
+          <Route path="/user/profile/update" element={<UserProfileUpdate />}/>
+          <Route path="/campaign/fund" element={<FundPage />}/>
+          <Route path="/search" element={<SearchPage />}/>
         </Routes>
       </Router>
       </UserContextProvider>

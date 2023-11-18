@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/signup",async(req,res)=>{
     try {
 
-    const {name,email,password} = req.body;
+    const {name,email,password,imageUrl} = req.body;
     const nameCheck = await UserModal.findOne({name});
     if(nameCheck){
         return res.json({success:false,message:"Name is already taken"});
@@ -19,7 +19,7 @@ router.post("/signup",async(req,res)=>{
     }
     const newPassword = await bcrypt.hash(password,10);
 
-    const newUser = await UserModal.create({name,email,password:newPassword});
+    const newUser = await UserModal.create({name,email,password:newPassword,imageUrl});
 
 
         const token = jwt.sign({userId:newUser._id},process.env.JWT_SECRET_KEY,{ expiresIn: "24h" });

@@ -11,6 +11,8 @@ const SignUP = () => {
   const [name,setName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const [imageUrl,setImageUrl] = useState(null);
+
   const {setuserInfo} = useContext(UserContext);
   const signupHandler = async(e)=>{
     e.preventDefault();
@@ -25,7 +27,8 @@ const SignUP = () => {
       const answer = await axios.post("http://localhost:4000/registration/signup",{
       email,
       name,
-      password
+      password,
+      imageUrl
     },config);
 
     if(answer.data.message==="User created"){
@@ -67,6 +70,23 @@ const SignUP = () => {
           placeholder="Password"
           className="w-full p-3 border rounded-md"
         />
+        <input
+          type="text"
+          onChange={(e) => setImageUrl(e.target.value)}
+          value={imageUrl}
+          placeholder="Image-url"
+          className="w-full p-3 border rounded-md"
+        />
+        {imageUrl && (
+        <div className="flex items-center justify-center mt-4">
+          <img
+            src={imageUrl}
+            alt="Image Preview"
+            className="w-12 h-12 object-cover rounded-full"
+          />
+          <span className="ml-2">Profile image Preview</span>
+        </div>
+      )}
         <button
           onClick={signupHandler}
           className="w-full bg-gray-600 text-white p-3 rounded-md hover:bg-gray-700"

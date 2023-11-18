@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaDollarSign } from 'react-icons/fa';
 
 const CampaignDetailsPage = () => {
     const [showParticipants, setShowParticipants] = useState(false);
@@ -11,6 +12,8 @@ const CampaignDetailsPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { singledatacampaign } = location.state;
+    console.log("asadad",location);
+    console.log(singledatacampaign.fundingReceived);
     if(!singledatacampaign){
          alert("Internal error ");
          navigate("/campaigns");
@@ -48,13 +51,35 @@ const CampaignDetailsPage = () => {
             alert(error);
         }
       }
+
+      const fundHandler = ()=>{
+        console.log("nav",singledatacampaign);
+        if(singledatacampaign.fundingReceived === singledatacampaign.donationTarget){
+          return alert("Fundings are full, cannot donate now ");
+        }
+        else{
+          navigate("/campaign/fund",{state:{campaignId:singledatacampaign._id,
+            fundingReceived: singledatacampaign.donationTarget - singledatacampaign.fundingReceived,
+          }});
+        }
+      }
+
       return (
-        <div className="max-w-4xl mx-auto bg-white rounded-md overflow-hidden shadow-md my-4">
+        <div className="max-w-4xl mx-auto bg-gray-100 rounded-md overflow-hidden shadow-md my-4 ">
           <img className=" mx-auto w-auto h-25 object-cover rounded-md" src={singledatacampaign.imageUrl} alt={singledatacampaign.campaignName} />
+          
             <div className="p-6">
-            <h2 className="text-3xl font-semibold mb-2">
+            <div className="flex justify-between items-center">
+            <h2 className="text-3xl font-semibold mb-2 ">
             Campaign name - {singledatacampaign.campaignName}
             </h2>
+            <button
+          className="bg-green-500 text-black font-bold px-4 py-2 rounded-md flex items-center focus:outline-none" onClick={()=>fundHandler()}>
+          <FaDollarSign className="mr-2" size={20}/>
+          Donate
+          </button>
+            </div>
+
             <p className="text-gray-600">
             Campaign subject - {singledatacampaign.campaignSubject}
             </p>
@@ -94,7 +119,7 @@ const CampaignDetailsPage = () => {
                 <span className="font-semibold">Funding target - </span> {singledatacampaign.donationTarget}
               </p>
               <p className="text-gray-700">
-                <span className="font-semibold">Funding recieved - </span> {singledatacampaign.fundingRecived ? (
+                <span className="font-semibold">Funding recieved - </span> {singledatacampaign.fundingReceived  ? (
                      <span>{singledatacampaign.fundingReceived}</span>
                 ):(<span>0</span>)}
               </p>
@@ -104,8 +129,12 @@ const CampaignDetailsPage = () => {
             <div className="mt-6">
             <p className="text-lg font-semibold">Help email : {singledatacampaign.helpEmail}</p>
             </div>
-           
-
+            <p className="text-gray-700 mt-5 ">
+                <span className="font-semibold">Upvotes - {singledatacampaign.upvotes}</span> 
+              </p>
+              <p className="text-gray-700">
+                <span className="font-semibold">Downvotes - {singledatacampaign.downvotes}</span> 
+              </p>
             <div className="mt-6">
       <button
         className="bg-purple-500 text-white px-4 py-2 rounded-md focus:outline-none"
@@ -182,7 +211,9 @@ const CampaignDetailsPage = () => {
           ))}
         </ul>
       </div>
-      )}
+      )
+      }
+      
       </div>
           </div>
         </div>

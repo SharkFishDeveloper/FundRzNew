@@ -26,7 +26,7 @@ const campaign = new mongoose.Schema({
     upvotes:{type:Number,default:0},
     downvotes:{type:Number,default:0},
     createdOn:{type:Date,default: Date.now},
-    fundingRecived:{type:Number},
+    fundingReceived:{type:Number,default:0},
     likedPerson:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
     dislikedPerson:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}],
     comments:[{
@@ -34,7 +34,8 @@ const campaign = new mongoose.Schema({
       date: { type: Date, default: Date.now },
       text: { type: String, required: true },
       name: { type: String, required: true }
-    }]
+    }],
+    isVerified:{type:Boolean,default:false}
 });
 
 export const campaignModal = mongoose.model("Campaign",campaign);

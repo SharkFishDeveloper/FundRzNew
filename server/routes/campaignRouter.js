@@ -238,4 +238,41 @@ router.put("/edit/follow",async(req,res)=>{
     }
 });
 
+router.put("/fund",async(req,res)=>{
+    const {fundAmount,campaignId} = req.body;
+    try {
+        const campaign = await campaignModal.findById({_id:campaignId});
+        if(!campaign){
+            return res.status(401).json({success:false,message:"No campaign found"});
+        }
+        else{
+            campaign.fundingReceived += fundAmount;
+            await campaign.save();
+            return res.status(200).json({success:true,message:`Successfully donated - ${fundAmount}`});
+            
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({success:true,message:"Error in donation"});
+    }
+    
+
+});
+
+router.get("/search",async(req,res)=>{
+    try {
+    const searchTerm = req.query.searchTerm;
+    console.log(`You searched for ${searchTerm}`);
+
+    const campaigns = await campaignModal.find({campaignName: { $regex: new RegExp(searchTerm, 'i') }});
+    console.log(`Search results for ${searchTerm}:`, campaigns);
+
+    return res.json({ success: true, message: `Search results for ${searchTerm}`, data: campaigns });
+
+    } catch (error) {
+        console.error("Error searching campaigns:", error);
+    return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+});
+
 export {router as campaignRouter};

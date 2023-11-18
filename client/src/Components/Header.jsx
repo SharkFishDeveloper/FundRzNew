@@ -1,8 +1,9 @@
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AiOutlineSearch } from 'react-icons/ai';
 import { UserContext } from '../UserContx/UserContext';
 
 const navigation = [
@@ -19,6 +20,7 @@ function classNames(...classes) {
 export default function Header() {
 
   const {setuserInfo,userInfo} = useContext(UserContext);
+  const navigate = useNavigate();
   //*loading user
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +72,10 @@ export default function Header() {
 
 
 
-
+  const searchHandler = ()=>{
+    navigate("/search");
+    console.log("clicked");
+  }
 
 
 
@@ -97,7 +102,7 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://cdn.icon-icons.com/icons2/2351/PNG/512/logo_github_icon_143196.png"
                     alt="Your Company"
                   />
                 </div>
@@ -120,16 +125,23 @@ export default function Header() {
                       </Link>)
                     ))}
                   </div>
+                  
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
+                  className="relative rounded-full bg-gray-800 p-1 text-gray-900 hover:text-gray-400 focus:outline-none "
+                  onClick={searchHandler}>
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <div className="flex items-center bg-gray-200 rounded-md px-2 py-2"
+
+
+                  >
+                  <AiOutlineSearch className="mr-5" size={30} />
+                  <div className="mr-4">Search</div>
+                  </div>
                 </button>
 
                 {/* Profile dropdown */}

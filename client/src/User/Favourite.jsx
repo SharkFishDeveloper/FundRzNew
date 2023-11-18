@@ -5,6 +5,7 @@ import axios from 'axios';
 import Loading from '../Components/Loading';
 import FavouriteCampInfo from "./FavouriteCampInfo.jsx";
 import NothingPage from "../Components/NothingPage.jsx";
+import LoadingFundsPage from '../Components/LoadingFundsPage.jsx';
 
 const Favourite = () => {
     const { userInfo } = useContext(UserContext);
@@ -37,7 +38,7 @@ const Favourite = () => {
                 ))}
               </div>
             ) : (
-              <NothingPage/>
+              <NothingPage/> //* nithignpage
             )
           ) : (
             <LoginComponentError />

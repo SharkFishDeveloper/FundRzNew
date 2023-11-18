@@ -53,5 +53,18 @@ router.get("/favourites",isLoggedIn,async(req,res)=>{
     }
 });
 
+router.put("/updateProfile",isLoggedIn,async(req,res)=>{
+    try {
+    const {name,email,imageUrl} = req.body;
+    req.user.email = email;
+    req.user.name = name;
+    req.user.imageUrl = imageUrl;
+    await req.user.save();
+    return res.status(200).json({success:false,message:"User updated successfully"});
+    } catch (error) {
+        console.error("Error in updating:", error);
+        return res.status(500).json({success:false,message:error});
+    }
+});
 
 export {router as detailsRouter};

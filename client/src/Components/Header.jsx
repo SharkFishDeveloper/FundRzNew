@@ -68,7 +68,22 @@ export default function Header() {
     alert(error.response.data.message);
   }
   }
-    
+  const historyHandler= async ()=> {
+    const config = {
+      withCredentials: true,
+    };
+    try {
+      const response = await axios.get("http://localhost:4000/campaign/history",config);
+      console.log(response.data.history);
+      const hist = response.data.history;
+      navigate("/history",{state:{history:hist}});
+     
+  }
+  catch(error){
+    console.log("error",error.response.data.message); 
+    alert(error.response.data.message);
+  }
+  }
 
 
 
@@ -176,6 +191,7 @@ export default function Header() {
                           >
                             Your Profile
                           </Link>
+                          
                         )}
                       </Menu.Item>
                       <Menu.Item>
@@ -197,7 +213,17 @@ export default function Header() {
                           </button>
                         )}
                       </Menu.Item>
-                    </Menu.Items>
+                    
+                    <Menu.Item>
+                        {({ active }) => (
+                          <button onClick={historyHandler}
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Donation history
+                          </button>
+                        )}
+                      </Menu.Item>
+                      </Menu.Items>
                   </Transition>
                 </Menu>
               </div>

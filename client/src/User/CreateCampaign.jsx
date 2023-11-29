@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { useNavigate } from 'react-router-dom';
+import validator from 'validator';
 
 const CreateCampaign = () => {
     const [campaignName,setCampaignName] = useState(""); //* name of campaign
@@ -55,17 +56,20 @@ const CreateCampaign = () => {
           console.log("Form Data:", formData);
           if(subparticipants > 15){
             return alert("Not more than 15 participants are allowed!!");
-            }
+          }
             else if(subparticipants <= 0){
                 return alert("Increase participants !!");
             }
+            if(!validator.isEmail(helpEmail)){
+              return alert("Enter valid help email");
+            }
             //! turn it on later
-        //   for (const key in formData) {
-        //     if ((formData[key] === 1 || formData[key] === "")) {
-        //       alert(`Please fill in all fields`);
-        //       return; 
-        //     }
-        //   }
+          for (const key in formData) {
+            if ((formData[key] === 1 || formData[key] === "")) {
+              alert(`Please fill in all fields`);
+              return; 
+            }
+          }
         navigate("done",{state:{formData}});
     }
     return (

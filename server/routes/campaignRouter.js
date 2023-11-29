@@ -191,7 +191,8 @@ router.put("/edit/comment",async(req,res)=>{
             //console.log("this is campaign",campaign);
             return res.status(200).json({message:campaignId});
     } catch (error) {
-        return res.status(500).json({success:false,message:error});
+        console.log("error comm",error);
+        return res.status(500).json({success:false,message: "Coudn't create comment"});
     }
     
 });
@@ -239,7 +240,7 @@ router.put("/edit/follow",async(req,res)=>{
 });
 
 router.put("/fund",async(req,res)=>{
-    const {fundAmount,campaignId} = req.body;
+    const {fundAmount,campaignId,name} = req.body;
     try {
         const campaign = await campaignModal.findById({_id:campaignId});
         if(!campaign){
@@ -248,6 +249,7 @@ router.put("/fund",async(req,res)=>{
         else{
             campaign.fundingReceived += fundAmount;
             req.user.amountFunded += fundAmount;
+            req.user.history.push({name:name,fundAmount:fundAmount});
             await req.user.save({validateBeforeSave:false});
             await campaign.save();
             return res.status(200).json({success:true,message:`Successfully donated - ${fundAmount}`});
@@ -259,6 +261,27 @@ router.put("/fund",async(req,res)=>{
     }
     
 
+});
+
+
+router.get("/history",async(req,res)=>{
+    try {
+        // Assuming that req.user is already populated with the user information
+        const userHistory = req.user.history;
+
+        // You can send the user's funding history as the response
+        res.status(200).json({
+            success: true,
+            history: userHistory
+        });
+    } catch (error) {
+        // Handle any errors that might occur during the process
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
 });
 
 router.get("/search",async(req,res)=>{

@@ -12,7 +12,7 @@ const Fundpage = () => {
     const [funds,setFunds] = useState(0);
     const {userInfo} = useContext(UserContext);
     const location = useLocation();
-    const {campaignId,fundingReceived} = location.state;
+    const {campaignId,fundingReceived,name} = location.state;
     console.log(campaignId);
     console.log(fundingReceived);
 
@@ -32,7 +32,9 @@ const Fundpage = () => {
 
             const answer = await axios.put("http://localhost:4000/campaign/fund",{
                 campaignId,
-                fundAmount:parseInt(funds, 10)
+                fundAmount:parseInt(funds, 10),
+                name
+                
             },config);
            setLoading(true);
            setTimeout(()=>{
@@ -62,7 +64,7 @@ const Fundpage = () => {
                     name="fundsSlider"
                     min={0}
                     max={fundingReceived}
-                    step={30} 
+                    step={1} 
                     value={funds}
                     onChange={handleSliderChange}
                     className="mt-2 mb-5 w-80  bg-gray-500 focus:outline-none focus:ring focus:border-gray-300"

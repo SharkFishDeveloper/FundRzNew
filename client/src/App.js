@@ -13,7 +13,7 @@ import UserProfile from "./User/UserProfile.jsx";
 import UserProfileUpdate from "./User/UserProfileUpdate.jsx";
 import FundPage from "./fund/Fundpage.jsx";
 import SearchPage from "./Search/SearchPage.jsx";
-
+import Userhistory from "./User/Userhistory.jsx";
 
  function App() {
   
@@ -35,6 +35,7 @@ import SearchPage from "./Search/SearchPage.jsx";
           <Route path="/user/profile/update" element={<UserProfileUpdate />}/>
           <Route path="/campaign/fund" element={<FundPage />}/>
           <Route path="/search" element={<SearchPage />}/>
+          <Route path="/history" element={<Userhistory />}/>
         </Routes>
       </Router>
       </UserContextProvider>

@@ -45,10 +45,11 @@ const CampaignDetailsPage = () => {
 
             alert(answer.data.message);
         } catch (error) {
-            if(error.response.data.message==="JWT not provided"){
+            if(error.response.data.message==="JWT not provided" || error.response.data.message === "Log in to continue"){
+              alert(error.response.data.message);
                 navigate("/login");
             }
-            alert(error);
+            
         }
       }
 
@@ -60,6 +61,7 @@ const CampaignDetailsPage = () => {
         else{
           navigate("/campaign/fund",{state:{campaignId:singledatacampaign._id,
             fundingReceived: singledatacampaign.donationTarget - singledatacampaign.fundingReceived,
+            name:singledatacampaign.campaignName
           }});
         }
       }

@@ -43,7 +43,7 @@ const CreateCampaignDone = () => {
             console.log("in create campaign" , response.data);
 
             if(response.data.message==="Campaign created successfully"){
-                navigate("/campaign");
+                navigate("/campaigns");
                 alert(response.data.message);
             }
             

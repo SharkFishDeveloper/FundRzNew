@@ -25,6 +25,13 @@ const user = new mongoose.Schema({
         campaignLoc: { type: String, required: true },
         // joinedOn:{}
       }],
+      history:[{
+        name: { type: String, required: true },
+        fundAmount: { type: Number, required: true },
+        Date: { type: Date, default:Date.now},
+    
+    }]
 });
+
 
 export const UserModal = mongoose.model("User",user);

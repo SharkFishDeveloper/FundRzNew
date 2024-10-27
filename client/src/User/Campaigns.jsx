@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CampaignCard from '../Components/CampaignCard';
 import LoginComponentError from "../Components/LoginComponentError.jsx";
 import Loading from '../Components/Loading.jsx';
+import deployedIp from '../IP.js';
 
 const Campaigns = () => {
     console.log(" start");
@@ -15,7 +16,8 @@ const Campaigns = () => {
             const config = {
               withCredentials: true,
             };
-        const response = await axios.get("http://localhost:4000/campaign/details",config);
+            
+        const response = await axios.get(`http://${deployedIp}:4000/campaign/details`,config);
         console.log("on campaign page",response.data.message);
         setCampaignDetails(response.data);
         }

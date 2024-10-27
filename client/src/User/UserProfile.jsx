@@ -7,6 +7,7 @@ import NothingPage from '../Components/NothingPage';
 import Nothing from '../Components/Nothing';
 import { useNavigate } from 'react-router-dom';
 import { FaExclamationCircle } from 'react-icons/fa';
+import deployedIp from '../IP';
 
 const UserProfile = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const UserProfile = () => {
             const config = {
                 withCredentials: true,
               };
-            const response = await axios.get("http://localhost:4000/user/profile",config);
+            const response = await axios.get(`http://${deployedIp}:4000/user/profile`,config);
             setUser(response.data.message);
             console.log("userprofile",response.data.message);
           } catch (error) {
@@ -29,12 +30,13 @@ const UserProfile = () => {
         profileHandler();
 
     },[]);
+    
     const handleClick = async(campaignId)=>{
         try {
             const config = {
                 withCredentials: true,
               };
-            const answer = await axios.get(`http://localhost:4000/campaign/details/
+            const answer = await axios.get(`http://${deployedIp}:4000/campaign/details/
             ${campaignId}`,config);
               console.log("frontedn fethcning favourite",answer.data);
               navigate("/campaign/view", { state: { singledatacampaign: answer.data.campaigns } });

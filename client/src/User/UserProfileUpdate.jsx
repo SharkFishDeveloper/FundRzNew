@@ -4,6 +4,7 @@ import Loading from '../Components/Loading';
 import LoginComponentError from '../Components/LoginComponentError';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import deployedIp from '../IP';
 
 const UserProfileUpdate = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const UserProfileUpdate = () => {
             const config = {
                 withCredentials: true,
               };
-          const response = await axios.put("http://localhost:4000/user/updateProfile",
+          const response = await axios.put(`http://${deployedIp}:4000/user/updateProfile`,
           {
             name,
             email,imageUrl

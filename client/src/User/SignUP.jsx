@@ -3,6 +3,7 @@ import axios from "axios";
 import "./SignUP.css";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContx/UserContext';
+import deployedIp from '../IP';
 
 
 const SignUP = () => {
@@ -20,11 +21,12 @@ const SignUP = () => {
     if(password.length<=5){
      return alert("Password is too small");
     }
+    
     const config = {
       withCredentials: true,
     };
     try {
-      const answer = await axios.post("http://localhost:4000/registration/signup",{
+      const answer = await axios.post(`http://${deployedIp}:4000/registration/signup`,{
       email,
       name,
       password,

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Components/Loading';
 import axios from 'axios';
 import LoadingFundsPage from '../Components/LoadingFundsPage';
+import deployedIp from '../IP';
 
 const Fundpage = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Fundpage = () => {
                 return alert("Cannot donate less");
               }
 
-            const answer = await axios.put("http://localhost:4000/campaign/fund",{
+            const answer = await axios.put(`http://${deployedIp}:4000/campaign/fund`,{
                 campaignId,
                 fundAmount:parseInt(funds, 10),
                 name

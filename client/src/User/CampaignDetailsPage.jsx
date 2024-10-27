@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaDollarSign } from 'react-icons/fa';
+import deployedIp from '../IP';
 
 const CampaignDetailsPage = () => {
     const [showParticipants, setShowParticipants] = useState(false);
@@ -39,7 +40,8 @@ const CampaignDetailsPage = () => {
             const config = {
                 withCredentials: true,
               };
-            const answer = await axios.put("http://localhost:4000/campaign/edit/comment",
+              
+            const answer = await axios.put(`http://${deployedIp}:4000/campaign/edit/comment`,
             {textAreaComment,campaignId:singledatacampaign._id},
             config);
 

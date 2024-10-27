@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { IoMdCheckmarkCircle } from 'react-icons/io';
 import { Circle } from 'rc-progress';
+import deployedIp from '../IP';
 
 
 const CampaignCard = ({campaign}) => {
@@ -18,7 +19,7 @@ const CampaignCard = ({campaign}) => {
                 withCredentials: true,
               };         
         console.log("CLiked liked",campaign._id);
-        const response = await axios.put("http://localhost:4000/campaign/edit/upvote", { campaignId: campaign._id },config);
+        const response = await axios.put(`http://${deployedIp}:4000/campaign/edit/upvote`, { campaignId: campaign._id },config);
         alert(response.data.message);
         console.log("error",response.data);
         } catch (error) {
@@ -35,7 +36,7 @@ const CampaignCard = ({campaign}) => {
                 withCredentials: true,
               };         
         console.log("CLiked liked",campaign._id);
-        const response = await axios.put("http://localhost:4000/campaign/edit/downvote", { campaignId: campaign._id },config);
+        const response = await axios.put(`http://${deployedIp}:4000/campaign/edit/downvote`, { campaignId: campaign._id },config);
         alert(response.data.message);
         console.log("error",response.data);
         } catch (error) {
@@ -56,7 +57,7 @@ const CampaignCard = ({campaign}) => {
             const config = {
                 withCredentials: true,
               }; 
-            const response = await axios.put("http://localhost:4000/campaign/edit/follow", { 
+            const response = await axios.put(`http://${deployedIp}:4000/campaign/edit/follow`, { 
             campaignId: campaign._id,
             campaignName:campaign.campaignName,
             campaignImage:campaign.imageUrl,

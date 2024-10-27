@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import validator from 'validator';
+import deployedIp from '../IP';
 
 const CreateCampaignDone = () => {
     const navigate = useNavigate();
@@ -35,8 +36,9 @@ const CreateCampaignDone = () => {
                 ...formData,
                 participants: participants,
             };
+            
             console.log("request data",requestData);
-            const response = await axios.post("http://localhost:4000/campaign/create-campaign",{
+            const response = await axios.post(`http://${deployedIp}:4000/campaign/create-campaign`,{
                 requestData
             },config);
 

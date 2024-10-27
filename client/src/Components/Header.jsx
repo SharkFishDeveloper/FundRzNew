@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { UserContext } from '../UserContx/UserContext';
+import deployedIp from '../IP';
 
 const navigation = [
   { name: 'Dashboard', href: '/', current: true },
@@ -29,7 +30,7 @@ export default function Header() {
           withCredentials: true,
         };
         console.log("before loading user");
-        const response = await axios.get("http://localhost:4000/user/details",config);
+        const response = await axios.get(`http://${deployedIp}:4000/user/details`,config);
         
         // if(response.data.message==="foundUser"){
         //   console.log("In if condition");
@@ -57,7 +58,7 @@ export default function Header() {
       withCredentials: true,
     };
     try {
-      const response = await axios.get("http://localhost:4000/registration/logout",config);
+      const response = await axios.get(`http://${deployedIp}:4000/registration/logout`,config);
       console.log(response.data.message);
       setuserInfo(null);
       alert(response.data.message);
@@ -73,7 +74,7 @@ export default function Header() {
       withCredentials: true,
     };
     try {
-      const response = await axios.get("http://localhost:4000/campaign/history",config);
+      const response = await axios.get(`http://${deployedIp}:4000/campaign/history`,config);
       console.log(response.data.history);
       const hist = response.data.history;
       navigate("/history",{state:{history:hist}});

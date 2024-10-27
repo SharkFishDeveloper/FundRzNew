@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContx/UserContext';
+import deployedIp from '../IP';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Login = () => {
     };
 
     try {
-      const answer = await axios.post("http://localhost:4000/registration/login",{
+      const answer = await axios.post(`http://${deployedIp}:4000/registration/login`,{
       email,
       password
     },config);

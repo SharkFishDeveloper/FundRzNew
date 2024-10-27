@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import deployedIp from '../IP';
 
 const FavouriteCampInfo = ({ campaign }) => {
     const navigate = useNavigate();
     const [favCampInfo,setFavCampInfo] = useState(null);
     const fetchFavCampHandler = async ()=>{
         try {
+          
             const config = {
                 withCredentials: true,
               };
-            const answer = await axios.get(`http://localhost:4000/campaign/details/
+            const answer = await axios.get(`http://${deployedIp}:4000/campaign/details/
             ${campaign._id}`,config);
               console.log("frontedn fethcning favourite",answer.data);
               navigate("/campaign/view", { state: { singledatacampaign: answer.data.campaigns } });

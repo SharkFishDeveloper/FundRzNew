@@ -4,6 +4,7 @@ import SearchResultsCard from "./SearchResultsCard.jsx";
 import NoResultsFound from "./NoResultsFound.jsx";
 import Loading from '../Components/Loading.jsx';
 import { useNavigate } from 'react-router-dom';
+import deployedIp from '../IP.js';
 
 const SearchPage = () => {
     const [searchTerm,setSearchTerm] = useState("");
@@ -17,11 +18,12 @@ const SearchPage = () => {
         if(searchTerm.length===0){
             setNoResult(true);
         }
+        
         try {
             const config = {
                 withCredentials: true,
               };
-          const response = await axios.get(`http://localhost:4000/campaign/search?searchTerm=${searchTerm}`,config);
+          const response = await axios.get(`http://${deployedIp}:4000/campaign/search?searchTerm=${searchTerm}`,config);
           if(response.data.data.length === 0){
             setNoResult(true);
             setLoading(false);

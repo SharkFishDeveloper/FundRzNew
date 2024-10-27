@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../UserContx/UserContext';
 import LoginComponentError from '../Components/LoginComponentError';
 import axios from 'axios';
-import Loading from '../Components/Loading';
 import FavouriteCampInfo from "./FavouriteCampInfo.jsx";
 import NothingPage from "../Components/NothingPage.jsx";
-import LoadingFundsPage from '../Components/LoadingFundsPage.jsx';
+import deployedIp from '../IP.js';
 
 const Favourite = () => {
     const { userInfo } = useContext(UserContext);
@@ -17,7 +16,8 @@ const Favourite = () => {
             const config = {
                 withCredentials: true,
               };
-            const answer = await axios.get("http://localhost:4000/user/favourites",config);
+            
+            const answer = await axios.get(`http://${deployedIp}:4000/user/favourites`,config);
             setCampInfo(answer.data.message);
            } catch (error) {
             console.log("error fav",error);
